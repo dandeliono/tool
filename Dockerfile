@@ -10,7 +10,6 @@ COPY package.json *.lock .
 # 只安装dependencies依赖
 # node镜像自带yarn
 RUN yarn --only=prod
-
 RUN yarn generate
 
 FROM nginx:alpine
