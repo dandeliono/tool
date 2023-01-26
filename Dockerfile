@@ -17,3 +17,4 @@ FROM nginx:alpine
 COPY --from=builder /code/dist/ /usr/share/nginx/html/
 
 EXPOSE 80
+
