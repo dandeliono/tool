@@ -7,6 +7,7 @@ WORKDIR /
 COPY package.json *.lock /
 
 # 只安装dependencies依赖
+RUN apt-get update || : && apt-get install python -y
 # node镜像自带yarn
 RUN yarn --only=prod
 RUN yarn generate
