@@ -2,7 +2,7 @@
 
 FROM node:16-alpine3.15
 
-WORKDIR /home/app/
+WORKDIR /
 
 # 把 package.json，package-lock.json(npm@5+) 或 yarn.lock 复制到工作目录(相对路径)
 COPY package.json *.lock .
@@ -11,11 +11,12 @@ COPY package.json *.lock .
 # node镜像自带yarn
 RUN yarn --only=prod
 
-# 把其他源文件复制到工作目录
-COPY . .
+RUN yarn generate
 
-# 替换成应用实际的端口号
-EXPOSE 3000
+FROM nginx:alpine
 
-# 这里根据实际起动命令做修改
-CMD [ "yarn", "dev" ]
+COPY /nginx/ /etc/nginx/
+
+COPY  /dist/ /usr/share/nginx/html/
+
+EXPOSE 80
