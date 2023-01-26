@@ -14,8 +14,6 @@ RUN yarn generate
 
 FROM nginx:alpine
 
-COPY /nginx/ /etc/nginx/
-
-COPY  /dist/ /usr/share/nginx/html/
+COPY  /static/ /usr/share/nginx/html/
 
 EXPOSE 80
